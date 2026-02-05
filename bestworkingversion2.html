@@ -6,7 +6,7 @@
 
 <style>
 :root {
-  --ui-scale: 1.25; /* +5% bigger */
+  --ui-scale: 1.08; /* ~8% bigger */
 }
 
 * {
@@ -167,7 +167,7 @@ button:hover {
 .no {
   background: rgba(255,255,255,0.5);
   color: #5B2E3A;
-  position: relative;
+  position: relative; /* 🔑 important */
 }
 
 /* STATES */
@@ -175,7 +175,7 @@ button:hover {
   display: none !important;
 }
 
-/* YES / NO VIEWS */
+/* YES VIEW */
 #yesView:not(.hidden),
 #noView:not(.hidden) {
   display: flex;
@@ -218,12 +218,14 @@ button:hover {
 
 <div class="valentines_card" id="card">
 
+  <!-- FRONT -->
   <div class="front_card">
     <div class="front_heart">💌</div>
     <h1>Special Delivery</h1>
     <p>Click to open your Valentine 💖</p>
   </div>
 
+  <!-- INSIDE -->
   <div class="inside_card">
 
     <div class="float" style="left:25%">🐒</div>
@@ -231,6 +233,7 @@ button:hover {
 
     <div class="center">
 
+      <!-- DEFAULT -->
       <div id="defaultView">
         <img class="main-gif" src="photos2/VDay_Monkey_Watermelon_gif.gif">
         <h1>Will you be my Valentine?</h1>
@@ -242,6 +245,7 @@ button:hover {
         </div>
       </div>
 
+      <!-- YES -->
       <div id="yesView" class="hidden">
         <h1>TYPE SHIT 😭💖</h1>
         <div class="cake-grid">
@@ -252,6 +256,7 @@ button:hover {
         </div>
       </div>
 
+      <!-- NO -->
       <div id="noView" class="hidden">
         <h1>That’s CRAZY.</h1>
         <p>The monkeys are disappointed in you.</p>
@@ -281,16 +286,19 @@ const noTexts = [
   "omg u clicked again??"
 ];
 
+/* OPEN CARD */
 card.addEventListener("click", () => {
   card.classList.add("open");
 });
 
+/* YES */
 yesBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   defaultView.classList.add("hidden");
   yesView.classList.remove("hidden");
 });
 
+/* NO */
 noBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
