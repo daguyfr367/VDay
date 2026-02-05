@@ -6,7 +6,7 @@
 
 <style>
 :root {
-  --ui-scale: 1.08; /* 🔥 8% BIGGER */
+  --ui-scale: 2;
 }
 
 * {
@@ -16,7 +16,6 @@
   font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
 }
 
-/* PAGE BACKGROUND */
 body {
   height: 100vh;
   overflow: hidden;
@@ -37,18 +36,15 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* CARD CONTAINER */
 .valentines_card {
-  position: relative;
   width: 100vw;
   height: 100vh;
   perspective: 3000px;
-  cursor: pointer;
   transform: scale(var(--ui-scale));
   transform-origin: center;
 }
 
-/* BOTH SIDES */
+/* CARD SIDES */
 .front_card,
 .inside_card {
   position: absolute;
@@ -57,12 +53,11 @@ body {
   backface-visibility: hidden;
 }
 
-/* FRONT CARD */
+/* FRONT */
 .front_card {
   background: #FFF9F9;
-  box-shadow:
-    inset 0 0 60px rgba(0,0,0,0.08),
-    0 20px 40px rgba(0,0,0,0.25);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.08),
+              0 20px 40px rgba(0,0,0,0.25);
   transform-origin: left;
   transition: transform 2.8s ease;
   z-index: 2;
@@ -82,7 +77,6 @@ body {
 .front_card h1 {
   font-size: 3rem;
   color: #C6969A;
-  margin-bottom: 12px;
 }
 
 .front_card p {
@@ -90,34 +84,16 @@ body {
   color: #5B2E3A;
 }
 
-/* OPEN STATE */
 .valentines_card.open .front_card {
   transform: rotateY(-160deg);
 }
 
-/* INSIDE CARD */
+/* INSIDE */
 .inside_card {
   background: radial-gradient(circle at top, #FADADD, #C6969A);
-  z-index: 1;
   overflow: hidden;
 }
 
-/* FLOATING EMOJIS */
-.float {
-  position: absolute;
-  bottom: -60px;
-  animation: drift 20s linear infinite;
-  opacity: 0.6;
-  font-size: clamp(22px, 4vw, 34px);
-}
-
-@keyframes drift {
-  to {
-    transform: translateY(-120vh) rotate(360deg);
-  }
-}
-
-/* CENTER CONTENT */
 .center {
   position: absolute;
   inset: 0;
@@ -130,23 +106,20 @@ body {
 }
 
 /* MAIN GIF */
-.center img.main-gif {
+.main-gif {
   width: min(70vw, 300px);
-  max-height: 42vh;
-  border-radius: 22px;
+  border-radius: 20px;
+  margin-bottom: 24px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-  margin-bottom: 30px;
 }
 
 /* TEXT */
 .center h1 {
-  font-size: clamp(2rem, 5.5vw, 3.2rem);
   color: white;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .center p {
-  font-size: 1.15rem;
   color: rgba(255,255,255,0.9);
   margin-bottom: 20px;
 }
@@ -154,22 +127,15 @@ body {
 /* BUTTONS */
 .buttons {
   display: flex;
-  gap: 18px;
-  justify-content: center;
-  margin-top: 22px;
+  gap: 20px;
 }
 
 button {
   padding: 16px 32px;
   border-radius: 999px;
   border: none;
-  cursor: pointer;
   font-size: 1.15rem;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .yes {
@@ -177,10 +143,11 @@ button:hover {
   color: #C6969A;
 }
 
+/* IMPORTANT FIX */
 .no {
   background: rgba(255,255,255,0.5);
   color: #5B2E3A;
-  position: relative;
+  position: static; /* 👈 FIX */
 }
 
 /* STATES */
@@ -188,8 +155,9 @@ button:hover {
   display: none !important;
 }
 
-/* YES VIEW */
-#yesView:not(.hidden) {
+/* YES / NO SCREENS */
+#yesView:not(.hidden),
+#noView:not(.hidden) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,42 +167,20 @@ button:hover {
 .cake-grid {
   display: grid;
   grid-template-columns: repeat(2, 160px);
-  gap: 22px;
-  margin-top: 28px;
+  gap: 20px;
 }
 
-.cake-grid img {
-  width: 100%;
-  border-radius: 18px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-}
-
-/* NO VIEW MONKEYS */
+/* NO MONKEYS */
 .no-monkeys {
   display: flex;
-  gap: 22px;
-  margin-top: 28px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .no-monkeys img {
   width: 140px;
-  border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-}
-
-/* SHAKE */
-.shake {
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
+  border-radius: 16px;
 }
 </style>
 </head>
@@ -243,24 +189,15 @@ button:hover {
 
 <div class="valentines_card" id="card">
 
-  <!-- FRONT -->
   <div class="front_card">
     <div class="front_heart">💌</div>
     <h1>Special Delivery</h1>
     <p>Click to open your Valentine 💖</p>
   </div>
 
-  <!-- INSIDE -->
   <div class="inside_card">
-
-    <div class="float" style="left:10%">💗</div>
-    <div class="float" style="left:30%">🐒</div>
-    <div class="float" style="left:50%">🍉</div>
-    <div class="float" style="left:70%">💞</div>
-
     <div class="center">
 
-      <!-- DEFAULT -->
       <div id="defaultView">
         <img class="main-gif" src="photos2/VDay_Monkey_Watermelon_gif.gif">
         <h1>Will you be my Valentine?</h1>
@@ -272,11 +209,8 @@ button:hover {
         </div>
       </div>
 
-      <!-- YES -->
       <div id="yesView" class="hidden">
         <h1>TYPE SHIT 😭💖</h1>
-        <p>You chose correctly. Enjoy the cake monkeys.</p>
-
         <div class="cake-grid">
           <img src="photos2/M1.png">
           <img src="photos2/M2.png">
@@ -285,11 +219,9 @@ button:hover {
         </div>
       </div>
 
-      <!-- NO -->
       <div id="noView" class="hidden">
         <h1>That’s CRAZY.</h1>
-        <p>The monkeys are disappointed in you.</p>
-
+        <p>The monkeys are disappointed.</p>
         <div class="no-monkeys">
           <img src="photos2/crazy monkey.gif">
           <img src="photos2/evilbananamonkey.gif">
@@ -310,46 +242,44 @@ const defaultView = document.getElementById("defaultView");
 const yesView = document.getElementById("yesView");
 const noView = document.getElementById("noView");
 
-let noHoverCount = 0;
-const MAX_RUNS = 3;
+let noClicks = 0;
+const noTexts = [
+  "damn it’s rlly like that twin 😭",
+  "omg u clicked again??"
+];
 
-/* OPEN CARD */
 card.addEventListener("click", () => {
   card.classList.add("open");
 });
 
-/* YES */
-yesBtn.addEventListener("click", (e) => {
+yesBtn.addEventListener("click", e => {
   e.stopPropagation();
   defaultView.classList.add("hidden");
   yesView.classList.remove("hidden");
 });
 
-/* NO CLICK */
-noBtn.addEventListener("click", (e) => {
+noBtn.addEventListener("click", e => {
   e.stopPropagation();
-  if (noHoverCount >= MAX_RUNS) {
+
+  if (noClicks < 2) {
+    noBtn.textContent = noTexts[noClicks];
+    noBtn.style.position = "fixed";
+    moveNoButton();
+    noClicks++;
+  } else {
     defaultView.classList.add("hidden");
     noView.classList.remove("hidden");
-    noView.classList.add("shake");
   }
 });
 
-/* RUNAWAY NO */
-noBtn.addEventListener("mouseenter", () => {
-  if (noHoverCount < MAX_RUNS) {
-    noHoverCount++;
-    const x = Math.random() * (window.innerWidth - 200);
-    const y = Math.random() * (window.innerHeight - 120);
-    noBtn.style.position = "fixed";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+function moveNoButton() {
+  const padding = 20;
+  const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+  const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
-    if (noHoverCount === MAX_RUNS) {
-      noBtn.textContent = "ok ok chill 😭";
-    }
-  }
-});
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
+}
 </script>
 
 </body>
