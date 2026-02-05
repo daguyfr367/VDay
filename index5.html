@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
 <style>
@@ -12,17 +13,10 @@
   font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
 }
 
-/* PAGE BACKGROUND */
 body {
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(
-    270deg,
-    #F7EFEA,
-    #EFE7F2,
-    #EADBC8,
-    #E6CFC3
-  );
+  background: linear-gradient(270deg, #F7EFEA, #EFE7F2, #EADBC8, #E6CFC3);
   background-size: 800% 800%;
   animation: gradientFlow 25s ease infinite;
 }
@@ -33,50 +27,33 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* CARD CONTAINER */
 .valentines_card {
-  position: relative;
   width: 100vw;
   height: 100vh;
+  position: relative;
   perspective: 3000px;
-  cursor: pointer;
 }
 
-/* BOTH SIDES */
-.front_card,
-.inside_card {
+/* FRONT */
+.front_card {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden;
-}
-
-/* FRONT CARD */
-.front_card {
   background: #FFF9F9;
-  box-shadow:
-    inset 0 0 60px rgba(0,0,0,0.08),
-    0 20px 40px rgba(0,0,0,0.25);
-  transform-origin: left;
-  transition: transform 2.8s ease;
-  z-index: 2;
-
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.08), 0 20px 40px rgba(0,0,0,0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-}
-
-.front_heart {
-  font-size: 120px;
-  margin-bottom: 40px;
+  transform-origin: left;
+  transition: transform 2.5s ease;
+  z-index: 2;
 }
 
 .front_card h1 {
   font-size: 3rem;
   color: #C6969A;
-  margin-bottom: 12px;
 }
 
 .front_card p {
@@ -84,85 +61,69 @@ body {
   color: #5B2E3A;
 }
 
-/* OPEN STATE */
+.front_heart {
+  font-size: 120px;
+  margin-bottom: 30px;
+}
+
 .valentines_card.open .front_card {
   transform: rotateY(-160deg);
 }
 
-/* INSIDE CARD */
+/* INSIDE */
 .inside_card {
-  background: radial-gradient(circle at top, #FADADD, #C6969A);
-  z-index: 1;
-  overflow: hidden;
-}
-
-/* FLOATING EMOJIS */
-.float {
   position: absolute;
-  bottom: -60px;
-  animation: drift 20s linear infinite;
-  opacity: 0.6;
-  font-size: clamp(20px, 4vw, 32px);
-}
-
-@keyframes drift {
-  to {
-    transform: translateY(-120vh) rotate(360deg);
-  }
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top, #FADADD, #C6969A);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
 /* CENTER CONTENT */
 .center {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px;
 }
 
-/* MAIN GIF */
 .center img.main-gif {
-  width: min(65vw, 280px);
-  max-height: 40vh;
+  width: min(70vw, 300px);
   border-radius: 20px;
+  margin-bottom: 30px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-  margin-bottom: 28px;
 }
 
-/* TEXT */
 .center h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
   color: white;
-  margin-bottom: 10px;
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 12px;
 }
 
 .center p {
   color: rgba(255,255,255,0.9);
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
-/* BUTTONS */
 .buttons {
   display: flex;
   gap: 16px;
   justify-content: center;
-  margin-top: 20px;
 }
 
 button {
   padding: 14px 28px;
   border-radius: 999px;
   border: none;
-  cursor: pointer;
   font-size: 1.1rem;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .yes {
@@ -171,22 +132,13 @@ button:hover {
 }
 
 .no {
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.6);
   color: #5B2E3A;
-  position: relative;
 }
 
 /* STATES */
 .hidden {
-  display: none !important;
-}
-
-/* YES VIEW */
-#yesView:not(.hidden) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: none;
 }
 
 /* CAKE GRID */
@@ -197,50 +149,16 @@ button:hover {
   margin-top: 24px;
 }
 
-.cake-grid img {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  animation: popIn 0.6s ease forwards;
-  opacity: 0;
-}
-
-.cake-grid img:nth-child(1) { animation-delay: 0.1s; }
-.cake-grid img:nth-child(2) { animation-delay: 0.3s; }
-.cake-grid img:nth-child(3) { animation-delay: 0.5s; }
-.cake-grid img:nth-child(4) { animation-delay: 0.7s; }
-
-@keyframes popIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* NO VIEW MONKEYS */
+/* NO MONKEYS */
 .no-monkeys {
   display: flex;
-  gap: 20px;
-  margin-top: 24px;
-  flex-wrap: wrap;
-  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
 }
 
 .no-monkeys img {
-  width: 120px;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-}
-
-/* SHAKE */
-.shake {
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
+  width: 90px;
+  border-radius: 12px;
 }
 </style>
 </head>
@@ -258,12 +176,6 @@ button:hover {
 
   <!-- INSIDE -->
   <div class="inside_card">
-
-    <div class="float" style="left:10%">💗</div>
-    <div class="float" style="left:30%">🐒</div>
-    <div class="float" style="left:50%">🍉</div>
-    <div class="float" style="left:70%">💞</div>
-
     <div class="center">
 
       <!-- DEFAULT -->
@@ -280,8 +192,8 @@ button:hover {
 
       <!-- YES -->
       <div id="yesView" class="hidden">
-        <h1>TYPE SHIT 😭💖</h1>
-        <p>You chose correctly. Enjoy the cake monkeys.</p>
+        <h1>Type Shit 😭💖</h1>
+        <p>Nice choice. Enjoy the cake monkeys 🍰🐒</p>
 
         <div class="cake-grid">
           <img src="photos2/M1.png">
@@ -293,13 +205,13 @@ button:hover {
 
       <!-- NO -->
       <div id="noView" class="hidden">
-        <h1>That’s CRAZY.</h1>
-        <p>The monkeys are disappointed in you.</p>
+        <h1>That’s crazy.</h1>
+        <p>The monkeys are disappointed 🐒</p>
 
         <div class="no-monkeys">
-          <img src="photos2/crazy monkey.gif">
-          <img src="photos2/evilbananamonkey.gif">
-          <img src="photos2/evlbanamonkey2.gif">
+          <img src="photos2/No1.gif">
+          <img src="photos2/No2.gif">
+          <img src="photos2/No3.gif">
         </div>
       </div>
 
@@ -316,44 +228,42 @@ const defaultView = document.getElementById("defaultView");
 const yesView = document.getElementById("yesView");
 const noView = document.getElementById("noView");
 
-let noHoverCount = 0;
+let noCount = 0;
 const MAX_RUNS = 3;
 
-/* OPEN CARD */
 card.addEventListener("click", () => {
   card.classList.add("open");
 });
 
-/* YES */
 yesBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   defaultView.classList.add("hidden");
   yesView.classList.remove("hidden");
 });
 
-/* NO CLICK */
 noBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  if (noHoverCount >= MAX_RUNS) {
-    defaultView.classList.add("hidden");
-    noView.classList.remove("hidden");
-    noView.classList.add("shake");
-  }
-});
 
-/* RUNAWAY NO */
-noBtn.addEventListener("mouseenter", () => {
-  if (noHoverCount < MAX_RUNS) {
-    noHoverCount++;
-    const x = Math.random() * (window.innerWidth - 160);
-    const y = Math.random() * (window.innerHeight - 80);
+  if (noCount < MAX_RUNS) {
+    noCount++;
+
+    const rect = noBtn.getBoundingClientRect();
+    const padding = 20;
+
+    const minX = padding;
+    const maxX = window.innerWidth - rect.width - padding;
+    const minY = padding + 100;
+    const maxY = window.innerHeight - rect.height - padding;
+
+    const x = Math.random() * (maxX - minX) + minX;
+    const y = Math.random() * (maxY - minY) + minY;
+
     noBtn.style.position = "fixed";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-
-    if (noHoverCount === MAX_RUNS) {
-      noBtn.textContent = "ok ok chill 😭";
-    }
+  } else {
+    defaultView.classList.add("hidden");
+    noView.classList.remove("hidden");
   }
 });
 </script>

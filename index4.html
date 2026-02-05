@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
 <style>
@@ -33,7 +34,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* CARD CONTAINER */
+/* CARD */
 .valentines_card {
   position: relative;
   width: 100vw;
@@ -42,7 +43,7 @@ body {
   cursor: pointer;
 }
 
-/* BOTH SIDES */
+/* SIDES */
 .front_card,
 .inside_card {
   position: absolute;
@@ -51,7 +52,7 @@ body {
   backface-visibility: hidden;
 }
 
-/* FRONT CARD */
+/* FRONT */
 .front_card {
   background: #FFF9F9;
   box-shadow:
@@ -84,12 +85,12 @@ body {
   color: #5B2E3A;
 }
 
-/* OPEN STATE */
+/* OPEN */
 .valentines_card.open .front_card {
   transform: rotateY(-160deg);
 }
 
-/* INSIDE CARD */
+/* INSIDE */
 .inside_card {
   background: radial-gradient(circle at top, #FADADD, #C6969A);
   z-index: 1;
@@ -111,35 +112,36 @@ body {
   }
 }
 
-/* CENTER CONTENT */
+/* CENTER */
 .center {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 24px;
 }
 
-/* MAIN GIF */
-.center img.main-gif {
+/* VIEW */
+.view {
+  text-align: center;
+}
+
+.view img {
   width: min(65vw, 280px);
   max-height: 40vh;
   border-radius: 20px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
-/* TEXT */
-.center h1 {
+.view h1 {
   font-size: clamp(1.8rem, 5vw, 3rem);
   color: white;
   margin-bottom: 10px;
 }
 
-.center p {
+.view p {
   color: rgba(255,255,255,0.9);
   margin-bottom: 18px;
 }
@@ -158,11 +160,6 @@ button {
   border: none;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.1);
 }
 
 .yes {
@@ -178,11 +175,12 @@ button:hover {
 
 /* STATES */
 .hidden {
-  display: none !important;
+  display: none;
 }
 
-/* YES VIEW */
-#yesView:not(.hidden) {
+/* YES / NO FLEX ONLY WHEN VISIBLE */
+#yesView:not(.hidden),
+#noView:not(.hidden) {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,46 +199,30 @@ button:hover {
   width: 100%;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  animation: popIn 0.6s ease forwards;
-  opacity: 0;
 }
 
-.cake-grid img:nth-child(1) { animation-delay: 0.1s; }
-.cake-grid img:nth-child(2) { animation-delay: 0.3s; }
-.cake-grid img:nth-child(3) { animation-delay: 0.5s; }
-.cake-grid img:nth-child(4) { animation-delay: 0.7s; }
-
-@keyframes popIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* NO VIEW MONKEYS */
+/* NO MONKEYS */
 .no-monkeys {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   margin-top: 24px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .no-monkeys img {
-  width: 120px;
+  width: 90px;
   border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-/* SHAKE */
-.shake {
-  animation: shake 0.5s;
-}
+/* 📱 MOBILE SCALE */
+@media (max-width: 600px) {
+  .inside_card .view {
+    transform: scale(1.2);
+  }
 
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
+  .front_card {
+    transform: scale(1.15);
+  }
 }
 </style>
 </head>
@@ -267,8 +249,8 @@ button:hover {
     <div class="center">
 
       <!-- DEFAULT -->
-      <div id="defaultView">
-        <img class="main-gif" src="photos2/VDay_Monkey_Watermelon_gif.gif">
+      <div id="defaultView" class="view">
+        <img src="photos2/VDay_Monkey_Watermelon_gif.gif">
         <h1>Will you be my Valentine?</h1>
         <p>I made this instead of sleeping 🐒💘</p>
 
@@ -279,9 +261,9 @@ button:hover {
       </div>
 
       <!-- YES -->
-      <div id="yesView" class="hidden">
-        <h1>TYPE SHIT 😭💖</h1>
-        <p>You chose correctly. Enjoy the cake monkeys.</p>
+      <div id="yesView" class="view hidden">
+        <h1>Type Shit 😭💖</h1>
+        <p>Correct choice. Enjoy the cake monkeys.</p>
 
         <div class="cake-grid">
           <img src="photos2/M1.png">
@@ -292,9 +274,9 @@ button:hover {
       </div>
 
       <!-- NO -->
-      <div id="noView" class="hidden">
-        <h1>That’s CRAZY.</h1>
-        <p>The monkeys are disappointed in you.</p>
+      <div id="noView" class="view hidden">
+        <h1>That’s crazy.</h1>
+        <p>The monkeys will remember this.</p>
 
         <div class="no-monkeys">
           <img src="photos2/crazy monkey.gif">
@@ -316,7 +298,7 @@ const defaultView = document.getElementById("defaultView");
 const yesView = document.getElementById("yesView");
 const noView = document.getElementById("noView");
 
-let noHoverCount = 0;
+let noCount = 0;
 const MAX_RUNS = 3;
 
 /* OPEN CARD */
@@ -324,36 +306,33 @@ card.addEventListener("click", () => {
   card.classList.add("open");
 });
 
-/* YES */
+/* YES CLICK */
 yesBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   defaultView.classList.add("hidden");
   yesView.classList.remove("hidden");
 });
 
-/* NO CLICK */
+/* NO CLICK (RUNAWAY FIRST) */
 noBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  if (noHoverCount >= MAX_RUNS) {
-    defaultView.classList.add("hidden");
-    noView.classList.remove("hidden");
-    noView.classList.add("shake");
-  }
-});
 
-/* RUNAWAY NO */
-noBtn.addEventListener("mouseenter", () => {
-  if (noHoverCount < MAX_RUNS) {
-    noHoverCount++;
+  if (noCount < MAX_RUNS) {
+    noCount++;
+
     const x = Math.random() * (window.innerWidth - 160);
     const y = Math.random() * (window.innerHeight - 80);
+
     noBtn.style.position = "fixed";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    if (noHoverCount === MAX_RUNS) {
-      noBtn.textContent = "ok ok chill 😭";
+    if (noCount === MAX_RUNS) {
+      noBtn.textContent = "ok fine 😭";
     }
+  } else {
+    defaultView.classList.add("hidden");
+    noView.classList.remove("hidden");
   }
 });
 </script>
