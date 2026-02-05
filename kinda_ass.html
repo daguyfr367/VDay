@@ -6,7 +6,7 @@
 
 <style>
 :root {
-  --ui-scale: 1.08; /* ~8% bigger */
+  --ui-scale: 1.08; /* 🔥 8% BIGGER */
 }
 
 * {
@@ -16,6 +16,7 @@
   font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
 }
 
+/* PAGE BACKGROUND */
 body {
   height: 100vh;
   overflow: hidden;
@@ -36,14 +37,18 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* CARD CONTAINER */
 .valentines_card {
   position: relative;
   width: 100vw;
   height: 100vh;
   perspective: 3000px;
+  cursor: pointer;
   transform: scale(var(--ui-scale));
+  transform-origin: center;
 }
 
+/* BOTH SIDES */
 .front_card,
 .inside_card {
   position: absolute;
@@ -52,7 +57,7 @@ body {
   backface-visibility: hidden;
 }
 
-/* FRONT */
+/* FRONT CARD */
 .front_card {
   background: #FFF9F9;
   box-shadow:
@@ -77,6 +82,7 @@ body {
 .front_card h1 {
   font-size: 3rem;
   color: #C6969A;
+  margin-bottom: 12px;
 }
 
 .front_card p {
@@ -84,23 +90,25 @@ body {
   color: #5B2E3A;
 }
 
+/* OPEN STATE */
 .valentines_card.open .front_card {
   transform: rotateY(-160deg);
 }
 
-/* INSIDE */
+/* INSIDE CARD */
 .inside_card {
   background: radial-gradient(circle at top, #FADADD, #C6969A);
   z-index: 1;
   overflow: hidden;
 }
 
+/* FLOATING EMOJIS */
 .float {
   position: absolute;
   bottom: -60px;
   animation: drift 20s linear infinite;
   opacity: 0.6;
-  font-size: 32px;
+  font-size: clamp(22px, 4vw, 34px);
 }
 
 @keyframes drift {
@@ -109,6 +117,7 @@ body {
   }
 }
 
+/* CENTER CONTENT */
 .center {
   position: absolute;
   inset: 0;
@@ -121,21 +130,23 @@ body {
 }
 
 /* MAIN GIF */
-.main-gif {
+.center img.main-gif {
   width: min(70vw, 300px);
-  max-height: 40vh;
+  max-height: 42vh;
   border-radius: 22px;
-  margin-bottom: 28px;
   box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  margin-bottom: 30px;
 }
 
 /* TEXT */
 .center h1 {
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
   color: white;
   margin-bottom: 12px;
 }
 
 .center p {
+  font-size: 1.15rem;
   color: rgba(255,255,255,0.9);
   margin-bottom: 20px;
 }
@@ -144,19 +155,21 @@ body {
 .buttons {
   display: flex;
   gap: 18px;
+  justify-content: center;
+  margin-top: 22px;
 }
 
 button {
   padding: 16px 32px;
   border-radius: 999px;
   border: none;
-  font-size: 1.15rem;
   cursor: pointer;
+  font-size: 1.15rem;
   transition: transform 0.2s ease;
 }
 
 button:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .yes {
@@ -167,7 +180,7 @@ button:hover {
 .no {
   background: rgba(255,255,255,0.5);
   color: #5B2E3A;
-  position: relative; /* 🔑 important */
+  position: relative;
 }
 
 /* STATES */
@@ -176,13 +189,10 @@ button:hover {
 }
 
 /* YES VIEW */
-#yesView:not(.hidden),
-#noView:not(.hidden) {
+#yesView:not(.hidden) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 /* CAKE GRID */
@@ -190,6 +200,7 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(2, 160px);
   gap: 22px;
+  margin-top: 28px;
 }
 
 .cake-grid img {
@@ -198,10 +209,11 @@ button:hover {
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* NO MONKEYS */
+/* NO VIEW MONKEYS */
 .no-monkeys {
   display: flex;
   gap: 22px;
+  margin-top: 28px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -210,6 +222,19 @@ button:hover {
   width: 140px;
   border-radius: 18px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+/* SHAKE */
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
 }
 </style>
 </head>
@@ -228,8 +253,10 @@ button:hover {
   <!-- INSIDE -->
   <div class="inside_card">
 
-    <div class="float" style="left:25%">🐒</div>
-    <div class="float" style="left:65%">🍉</div>
+    <div class="float" style="left:10%">💗</div>
+    <div class="float" style="left:30%">🐒</div>
+    <div class="float" style="left:50%">🍉</div>
+    <div class="float" style="left:70%">💞</div>
 
     <div class="center">
 
@@ -248,6 +275,8 @@ button:hover {
       <!-- YES -->
       <div id="yesView" class="hidden">
         <h1>TYPE SHIT 😭💖</h1>
+        <p>You chose correctly. Enjoy the cake monkeys.</p>
+
         <div class="cake-grid">
           <img src="photos2/M1.png">
           <img src="photos2/M2.png">
@@ -260,6 +289,7 @@ button:hover {
       <div id="noView" class="hidden">
         <h1>That’s CRAZY.</h1>
         <p>The monkeys are disappointed in you.</p>
+
         <div class="no-monkeys">
           <img src="photos2/crazy monkey.gif">
           <img src="photos2/evilbananamonkey.gif">
@@ -280,11 +310,8 @@ const defaultView = document.getElementById("defaultView");
 const yesView = document.getElementById("yesView");
 const noView = document.getElementById("noView");
 
-let noClicks = 0;
-const noTexts = [
-  "damn it’s rlly like that twin 😭",
-  "omg u clicked again??"
-];
+let noHoverCount = 0;
+const MAX_RUNS = 3;
 
 /* OPEN CARD */
 card.addEventListener("click", () => {
@@ -298,29 +325,31 @@ yesBtn.addEventListener("click", (e) => {
   yesView.classList.remove("hidden");
 });
 
-/* NO */
+/* NO CLICK */
 noBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-
-  if (noClicks < 2) {
-    noBtn.textContent = noTexts[noClicks];
-    noBtn.style.position = "fixed";
-    moveNoButton();
-    noClicks++;
-  } else {
+  if (noHoverCount >= MAX_RUNS) {
     defaultView.classList.add("hidden");
     noView.classList.remove("hidden");
+    noView.classList.add("shake");
   }
 });
 
-function moveNoButton() {
-  const padding = 40;
-  const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-  const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+/* RUNAWAY NO */
+noBtn.addEventListener("mouseenter", () => {
+  if (noHoverCount < MAX_RUNS) {
+    noHoverCount++;
+    const x = Math.random() * (window.innerWidth - 200);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top = Math.random() * maxY + "px";
-}
+    if (noHoverCount === MAX_RUNS) {
+      noBtn.textContent = "ok ok chill 😭";
+    }
+  }
+});
 </script>
 
 </body>
