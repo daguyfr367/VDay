@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
 <style>
+:root {
+  --ui-scale: 1.08; /* 🔥 8% BIGGER */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -35,17 +38,19 @@ body {
 }
 
 /* CARD CONTAINER */
-.valentinescard {
+.valentines_card {
   position: relative;
   width: 100vw;
   height: 100vh;
   perspective: 3000px;
   cursor: pointer;
+  transform: scale(var(--ui-scale));
+  transform-origin: center;
 }
 
 /* BOTH SIDES */
-.frontcard,
-.insidecard {
+.front_card,
+.inside_card {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -53,7 +58,7 @@ body {
 }
 
 /* FRONT CARD */
-.frontcard {
+.front_card {
   background: #FFF9F9;
   box-shadow:
     inset 0 0 60px rgba(0,0,0,0.08),
@@ -69,29 +74,29 @@ body {
   text-align: center;
 }
 
-.frontheart {
-  font-size: 132px; /* 120px * 1.10 */
-  margin-bottom: 44px; /* 40px * 1.10 */
+.front_heart {
+  font-size: 120px;
+  margin-bottom: 40px;
 }
 
-.frontcard h1 {
-  font-size: 3.3rem; /* 3rem * 1.10 */
+.front_card h1 {
+  font-size: 3rem;
   color: #C6969A;
-  margin-bottom: 13.2px; /* 12px * 1.10 */
+  margin-bottom: 12px;
 }
 
-.frontcard p {
-  font-size: 1.54rem; /* 1.4rem * 1.10 */
+.front_card p {
+  font-size: 1.4rem;
   color: #5B2E3A;
 }
 
 /* OPEN STATE */
-.valentinescard.open .frontcard {
+.valentines_card.open .front_card {
   transform: rotateY(-160deg);
 }
 
 /* INSIDE CARD */
-.insidecard {
+.inside_card {
   background: radial-gradient(circle at top, #FADADD, #C6969A);
   z-index: 1;
   overflow: hidden;
@@ -103,7 +108,7 @@ body {
   bottom: -60px;
   animation: drift 20s linear infinite;
   opacity: 0.6;
-  font-size: clamp(24.2px, 4.4vw, 37.4px); /* Increased by 10% */
+  font-size: clamp(22px, 4vw, 34px);
 }
 
 @keyframes drift {
@@ -121,45 +126,45 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 26.4px; /* 24px * 1.10 */
+  padding: 24px;
 }
 
 /* MAIN GIF */
 .center img.main-gif {
-  width: min(77vw, 330px); /* 70vw * 1.10, 300px * 1.10 */
-  max-height: 46.2vh; /* 42vh * 1.10 */
-  border-radius: 24.2px; /* 22px * 1.10 */
-  box-shadow: 0 17.6px 44px rgba(0,0,0,0.3); /* 16px * 1.10, 40px * 1.10 */
-  margin-bottom: 33px; /* 30px * 1.10 */
+  width: min(70vw, 300px);
+  max-height: 42vh;
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  margin-bottom: 30px;
 }
 
 /* TEXT */
 .center h1 {
-  font-size: clamp(2.2rem, 6.05vw, 3.52rem); /* Increased by 10% */
+  font-size: clamp(2rem, 5.5vw, 3.2rem);
   color: white;
-  margin-bottom: 13.2px; /* 12px * 1.10 */
+  margin-bottom: 12px;
 }
 
 .center p {
-  font-size: 1.265rem; /* 1.15rem * 1.10 */
+  font-size: 1.15rem;
   color: rgba(255,255,255,0.9);
-  margin-bottom: 22px; /* 20px * 1.10 */
+  margin-bottom: 20px;
 }
 
 /* BUTTONS */
 .buttons {
   display: flex;
-  gap: 19.8px; /* 18px * 1.10 */
+  gap: 18px;
   justify-content: center;
-  margin-top: 24.2px; /* 22px * 1.10 */
+  margin-top: 22px;
 }
 
 button {
-  padding: 17.6px 35.2px; /* 16px * 1.10, 32px * 1.10 */
+  padding: 16px 32px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  font-size: 1.265rem; /* 1.15rem * 1.10 */
+  font-size: 1.15rem;
   transition: transform 0.2s ease;
 }
 
@@ -193,30 +198,30 @@ button:hover {
 /* CAKE GRID */
 .cake-grid {
   display: grid;
-  grid-template-columns: repeat(2, 176px); /* 160px * 1.10 */
-  gap: 24.2px; /* 22px * 1.10 */
-  margin-top: 30.8px; /* 28px * 1.10 */
+  grid-template-columns: repeat(2, 160px);
+  gap: 22px;
+  margin-top: 28px;
 }
 
 .cake-grid img {
   width: 100%;
-  border-radius: 19.8px; /* 18px * 1.10 */
-  box-shadow: 0 11px 27.5px rgba(0,0,0,0.25); /* 10px * 1.10, 25px * 1.10 */
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
 /* NO VIEW MONKEYS */
 .no-monkeys {
   display: flex;
-  gap: 24.2px; /* 22px * 1.10 */
-  margin-top: 30.8px; /* 28px * 1.10 */
+  gap: 22px;
+  margin-top: 28px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .no-monkeys img {
-  width: 154px; /* 140px * 1.10 */
-  border-radius: 19.8px; /* 18px * 1.10 */
-  box-shadow: 0 13.2px 33px rgba(0,0,0,0.35); /* 12px * 1.10, 30px * 1.10 */
+  width: 140px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
 /* SHAKE */
@@ -236,17 +241,17 @@ button:hover {
 
 <body>
 
-<div class="valentinescard" id="card">
+<div class="valentines_card" id="card">
 
   <!-- FRONT -->
-  <div class="frontcard">
-    <div class="frontheart">💌</div>
+  <div class="front_card">
+    <div class="front_heart">💌</div>
     <h1>Special Delivery</h1>
     <p>Click to open your Valentine 💖</p>
   </div>
 
   <!-- INSIDE -->
-  <div class="insidecard">
+  <div class="inside_card">
 
     <div class="float" style="left:10%">💗</div>
     <div class="float" style="left:30%">🐒</div>
@@ -282,7 +287,7 @@ button:hover {
 
       <!-- NO -->
       <div id="noView" class="hidden">
-        <h1>That's CRAZY.</h1>
+        <h1>That’s CRAZY.</h1>
         <p>The monkeys are disappointed in you.</p>
 
         <div class="no-monkeys">
@@ -305,8 +310,8 @@ const defaultView = document.getElementById("defaultView");
 const yesView = document.getElementById("yesView");
 const noView = document.getElementById("noView");
 
-let noClickCount = 0;
-const MAXCLICKS = 3;
+let noHoverCount = 0;
+const MAX_RUNS = 3;
 
 /* OPEN CARD */
 card.addEventListener("click", () => {
@@ -320,56 +325,36 @@ yesBtn.addEventListener("click", (e) => {
   yesView.classList.remove("hidden");
 });
 
-/* NO CLICK - Fixed to work on mobile */
+/* NO CLICK */
 noBtn.addEventListener("click", (e) => {
   e.stopPropagation();
-  
-  noClickCount++;
-  
-  if (noClickCount >= MAXCLICKS) {
-    // After 3 clicks, show the disappointed monkeys
+  if (noHoverCount >= MAX_RUNS) {
     defaultView.classList.add("hidden");
     noView.classList.remove("hidden");
     noView.classList.add("shake");
-  } else {
-    // Move the button to a random position
-    const yesRect = yesBtn.getBoundingClientRect();
-    const buttonWidth = 200;
-    const buttonHeight = 60;
-    
-    let x, y;
-    let attempts = 0;
-    const maxAttempts = 10;
-    
-    // Keep trying random positions until we find one that doesn't overlap with YES button
-    do {
-      x = Math.random() * (window.innerWidth - buttonWidth);
-      y = Math.random() * (window.innerHeight - buttonHeight);
-      attempts++;
-      
-      // Check if new position would overlap with YES button (with safety margin)
-      const wouldOverlap = !(
-        x + buttonWidth + 50 < yesRect.left ||
-        x - 50 > yesRect.right ||
-        y + buttonHeight + 50 < yesRect.top ||
-        y - 50 > yesRect.bottom
-      );
-      
-      if (!wouldOverlap) break;
-      
-    } while (attempts < maxAttempts);
-    
+  }
+});
+
+/* RUNAWAY NO */
+noBtn.addEventListener("mouseenter", () => {
+  if (noHoverCount < MAX_RUNS) {
+    noHoverCount++;
+    const x = Math.random() * (window.innerWidth - 200);
+    const y = Math.random() * (window.innerHeight - 120);
     noBtn.style.position = "fixed";
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
-    noBtn.style.zIndex = "1000";
 
-    if (noClickCount === 1) {
-      noBtn.textContent = "damn it's rlly like that twin 😭";
+    if (noHoverCount === 1) {
+      noBtn.textContent = "damn it’s rlly like that twin 😭";
     }
 
-    if (noClickCount === 2) {
+    if (noHoverCount === 2) {
       noBtn.textContent = "omg u clicked Ms. Nigga again??";
+    }
+
+    if (noHoverCount === MAX_RUNS) {
+      noBtn.textContent = "k nigga click 1 more time & c wht hppens";
     }
   }
 });
